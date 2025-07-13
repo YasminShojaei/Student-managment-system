@@ -22,3 +22,43 @@ def student_birth_date_validator(student_birth_date):
 
     except Exception as e:
         print(f"{e} not a valid date")
+
+def teacher_id_validator(student_id):
+    pass
+
+def teacher_name_validator(teacher_name):
+    if not (type(teacher_name) == str and re.match("[A-Za-z]{3,30}", teacher_name)):
+        raise ValueError("Teacher name must contain only letters - (3-30)")
+
+def teacher_family_validator(teacher_family):
+    if not (type(teacher_family) == str and re.match("[A-Za-z]{3,30}", teacher_family)):
+        raise ValueError("Teacher family name must contain only letters - (3-30)")
+
+def teacher_birth_date_validator(teacher_birth_date):
+    try:
+        if type(teacher_birth_date) == str:
+            datetime.strptime(teacher_birth_date, "%Y-%m-%d")
+        elif type(teacher_birth_date) == datetime:
+            pass
+
+    except Exception as e:
+        print(f"{e} not a valid date")
+
+def course_id_validator(course_id):
+    pass
+def course_title_validator(course_title):
+    if not (type(course_title) == str and re.match("[A-Za-z]{3,20}", course_title)):
+        raise ValueError("Course title must contain only letters - (3-20)")
+def course_unit_validator(course_unit):
+    if not (type(course_unit) == int and 2 <= course_unit < 5 ):
+        raise ValueError("Course unit must be between 2 and 5")
+def course_date_validator(course_date):
+    try:
+        if type(course_date) == str:
+            datetime.strptime(course_date, "%Y-%m-%d %H:%M")
+        elif type(course_date) == datetime:
+            pass
+    except Exception as e:
+        print(f"{e} not a valid date and time (example: 2025-07-14 14:30)")
+
+
