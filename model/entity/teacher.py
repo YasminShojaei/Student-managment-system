@@ -1,13 +1,11 @@
-from numba.core.rvsdg_frontend.rvsdg.bc2rvsdg import propagate_stack
-
 from model.tools.validation import *
 
 class Teacher:
     def __init__(self, teacher_id, name, family, birth_date):
-        self._teacher_id = teacher_id
-        self._name = name
-        self._family = family
-        self._birth_date = birth_date
+        self.teacher_id = teacher_id
+        self.name = name
+        self.family = family
+        self.birth_date = birth_date
 
     def __repr__(self):
         return (self._teacher_id, self._name, self._family, self._birth_date)
@@ -21,7 +19,7 @@ class Teacher:
 
     @teacher_id.setter
     def teacher_id(self, value):
-        teacher_name_validator(value)
+        teacher_id_validator(value)
         self._teacher_id = value
 
     @property

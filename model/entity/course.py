@@ -1,20 +1,22 @@
 from model.tools.validation import course_id_validator, course_title_validator, course_unit_validator, \
-    course_date_validator
+    course_date_validator, course_teacher_validator
 
 
 class Course:
-    def __init__(self, course_id, title, unit, course_date):
-        self._course_id = course_id
-        self._title = title
-        self._unit = unit
-        self._course_date = course_date
+    def __init__(self, course_id, course_teacher, title, unit, course_date):
+        self.course_teacher = course_teacher
+        self.course_id = course_id
+        self.course_teacher = course_teacher
+        self.title = title
+        self.unit = unit
+        self.course_date = course_date
 
 
     def __repr__(self):
-        return (self._course_id, self._title, self._unit, self._course_date)
+        return (self._course_id, self._course_teacher, self._title, self._unit, self._course_date)
 
     def to_tuple(self):
-        return (self._course_id, self._title, self._unit, self._course_date)
+        return (self._course_id, self._course_teacher, self._title, self._unit, self._course_date)
 
     @property
     def course_id(self):
@@ -24,6 +26,15 @@ class Course:
     def course_id(self, value):
         course_id_validator(value)
         self._course_id = value
+
+    @property
+    def course_teacher(self):
+        return self._course_teacher
+
+    @course_teacher.setter
+    def course_teacher(self, value):
+        course_teacher_validator(value)
+        self._course_teacher = value
 
     @property
     def title(self):
