@@ -1,4 +1,4 @@
-class StudentController:
+class StudentRepository:
     def save_student(self):
         pass
 
