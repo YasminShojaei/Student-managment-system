@@ -16,4 +16,4 @@ where student_id = ?;
 
 
 -- delete student
-delete from students where student_id = ?;
+delete from students where student_id = 23;
