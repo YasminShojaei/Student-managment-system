@@ -24,11 +24,10 @@ class StudentRepository:
         )
         self.disconnect(commit=True)
 
-    def edit_student(self, student):
+    def edit_student(self, new_student):
         self.connect()
-
-        self.cursor.execute("update students set student_id=?, name=?, family=?, birth_date=? where student_id = ?",
-                       [student.student_id, student.name, student.family, student.birth_date])
+        self.cursor.execute("update students set name=?, family=?, birth_date=? where student_id = ?",
+                       [new_student.name, new_student.family, new_student.birth_date, new_student.student_id])
         self.disconnect(commit = True)
 
     def delete_student(self, student_id):
