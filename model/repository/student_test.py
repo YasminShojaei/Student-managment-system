@@ -19,7 +19,7 @@ from controller.student_controller import StudentController
 # test passed
 # student_repo.edit_student(student_1)
 # student_controller = StudentController()
-# status, message = student_controller.edit_student(15, "yegane", "sanjari", "1389-10-10")
+# status, message = student_controller.edit_student(1343, "alireza", "mohamadi", "1343-01-01")
 
 # test passed
 # student_repo.delete_student(2005)
