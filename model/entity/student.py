@@ -9,7 +9,7 @@ class Student:
         self.birth_date = birth_date
 
     def __repr__(self):
-        return (self._student_id, self._name, self._family, self._birth_date)
+        return f"{self.__dict__}"
 
     def to_tuple(self):
         return (self._student_id, self._name, self._family, self._birth_date)
