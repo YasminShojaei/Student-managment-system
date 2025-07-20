@@ -1,5 +1,3 @@
-from sqlalchemy.sql.coercions import expect
-
 from model.entity.student import Student
 from model.repository.student_reposity import StudentRepository
 

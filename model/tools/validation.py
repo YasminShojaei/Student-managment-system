@@ -52,7 +52,7 @@ def course_id_validator(course_id):
         raise ValueError("Course ID must be a 4-digit number between 1000 and 9999")
 
 def course_teacher_validator(course_teacher):
-    if not (type(course_teacher) == str and re.fullmatch(r"[A-Za-z\s]{3,30}", course_teacher)):
+    if not (type(course_teacher) == str and re.fullmatch(r"[A-Za-z\s]{3,40}", course_teacher)):
         raise ValueError("Course teacher name must contain only letters - (3-30)")
 
 def course_title_validator(course_title):
@@ -60,7 +60,7 @@ def course_title_validator(course_title):
         raise ValueError("Course title must contain only letters - (3-20)")
 
 def course_unit_validator(course_unit):
-    if not (type(course_unit) == int and 2 <= course_unit < 5 ):
+    if not (type(course_unit) == int and 2 <= course_unit <= 5 ):
         raise ValueError("Course unit must be between 2 and 5")
 
 def course_date_validator(course_date):

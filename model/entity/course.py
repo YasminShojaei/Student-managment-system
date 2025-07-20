@@ -13,7 +13,7 @@ class Course:
 
 
     def __repr__(self):
-        return (self._course_id, self._course_teacher, self._title, self._unit, self._course_date)
+        return f"{self.__dict__}"
 
     def to_tuple(self):
         return (self._course_id, self._course_teacher, self._title, self._unit, self._course_date)

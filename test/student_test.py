@@ -1,6 +1,6 @@
-import sqlite3
-
-from controller.student_controller import StudentController
+# import sqlite3
+#
+# from controller.student_controller import StudentController
 # from model.entity.student import Student
 # from model.repository.student_reposity import StudentRepository
 
