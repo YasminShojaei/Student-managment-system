@@ -15,33 +15,39 @@ from controller.student_controller import StudentController
 # student_repo.save_student(student_1)
 # student_controller = StudentController()
 # status, message = student_controller.save_student(13, "yegane", "sanjari", "1389-10-10")
+# print(status, message)
 
 # test passed
 # student_repo.edit_student(student_1)
 # student_controller = StudentController()
 # status, message = student_controller.edit_student(1343, "alireza", "mohamadi", "1343-01-01")
+# print(status, message)
 
 # test passed
 # student_repo.delete_student(2005)
 # student_controller = StudentController()
 # status, message = student_controller.delete_student(13)
+# print(status, message)
+
 
 
 # test passed
 # print(student_repo.find_all())
 # student_controller = StudentController()
 # status, message = student_controller.find_all()
+# print(status, message)
 
-# test passed
-# student_controller = StudentController()
-# status, message = student_controller.find_all()
 
 # test passed
 # print(student_repo.find_by_id(1379))
 # student_controller = StudentController()
 # status, message = student_controller.find_by_id(1380)
+# print(status, message)
+
 
 # test passed
 # print(student_repo.find_by_name_family("yasmin", "shojaei"))
 # student_controller = StudentController()
 # status, message = student_controller.find_by_name_family("yasmin", "shojaei")
+# print(status, message)
+

@@ -1,5 +1,4 @@
 import sqlite3
-from model.entity import student
 
 
 class StudentRepository:
