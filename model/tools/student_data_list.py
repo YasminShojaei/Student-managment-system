@@ -1,1 +1,1 @@
-course_values = ("python")
+course_values = ("pysic")

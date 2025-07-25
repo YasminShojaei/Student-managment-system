@@ -10,7 +10,7 @@ from model.entity.teacher import Teacher
 class TeacherView:
 
     def save_teacher(self):
-        pass
+        ...
 
     def edit_teacher(self):
         pass
