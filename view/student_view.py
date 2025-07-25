@@ -11,7 +11,7 @@ from model.tools.student_data_list import course_values
 class StudentView:
 
     def save_student(self):
-        pass
+        ...
 
     def edit_student(self):
         pass
