@@ -1,9 +1,14 @@
 import sqlite3
+import os
+
+# این کد ها را جهت مطلق سازی مسیر دیتا بیس اضافه مکینم که در فایل اچ به مشکل نخورم و دیتا بیس چدید نسازه
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "university_db.sqlite")
 
 
 class CourseRepository:
     def connect(self):
-        self.connection = sqlite3.connect("university_db.sqlite")
+        self.connection = sqlite3.connect(DB_PATH)
         self.cursor = self.connection.cursor()
 
     def disconnect(self, commit = False):
@@ -63,9 +68,11 @@ class CourseRepository:
         return course_list
 
     def get_all_course_names(self):
-        self.connect()
+        self.connection = sqlite3.connect("university_db.sqlite")
+        self.cursor = self.connection.cursor()
         self.cursor.execute("SELECT title FROM courses")
         course_names = [row[0] for row in self.cursor.fetchall()]
-        self.disconnect()
+        self.cursor.close()
+        self.connection.close()
         return course_names
 
