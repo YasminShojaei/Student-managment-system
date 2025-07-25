@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 
 from PIL import Image, ImageTk
+from PyQt5.QtGui.QRawFont import familyName
 
 from controller.student_controller import StudentController
 from controller.course_controller import CourseController
@@ -12,7 +13,13 @@ from model.tools.student_data_list import course_values
 class StudentView:
 
     def save_student(self):
-        ...
+        student_id = self.student_id.get()
+        name = self.name.get()
+        family = self.family.get()
+        birth_date = self.birth_date.get()
+        selected_course = self.course.get()
+
+        # student = Student(student_id,name,family,birth_date, )
 
     def edit_student(self):
         pass
@@ -90,6 +97,9 @@ class StudentView:
       self.course = StringVar()
       self.course_combobox = ttk.Combobox(student_window, textvariable=self.course, state="readonly",background="light blue", font=("Arial", 12))
       course_controller=CourseController()
+      course_name = course_controller.get_all_course_names()
+      self.course_combobox["values"] = course_name
+
       student_table = ttk.Treeview(student_window, columns=[1,2,3,4,5], show="headings", height=20)
 
       self.student_table.heading(1, text="Student ID")
