@@ -1,19 +1,21 @@
---  student save
-insert into students
-(student_id, name, family, birth_date)
-values
-    (?, 'sogol', 'shojaei', 1376-02-25);
+INSERT INTO students
+(student_id, name, family, birth_date, course_name)
+VALUES
+(1001, 'sogol', 'shojaei', '1376-02-25', 'Python');
 
+SELECT *
+FROM students
+WHERE student_id = 1001;
 
--- search / find student
-select *
-from students
-where student_id = ?;
+UPDATE students
+SET student_id = 1001,
+    name = 'sogol',
+    family = 'shojaei',
+    birth_date = '1376-02-25',
+    course_name = 'Python'
+WHERE student_id = 1001;
 
--- edit student
-update students set student_id=?, name= ?, family=?, birth_date=?
-where student_id = ?;
+DELETE FROM students
+WHERE student_id = 1001;
 
-
--- delete student
-delete from students where student_id = 23;
+SELECT * FROM students;

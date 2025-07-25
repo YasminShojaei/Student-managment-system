@@ -2,17 +2,18 @@ from model.tools.validation import *
 
 
 class Student:
-    def __init__(self, student_id, name, family, birth_date):
+    def __init__(self, student_id, name, family, birth_date, course_name):
         self.student_id = student_id
         self.name = name
         self.family = family
         self.birth_date = birth_date
+        self.course_name = course_name
 
     def __repr__(self):
         return f"{self.__dict__}"
 
     def to_tuple(self):
-        return (self._student_id, self._name, self._family, self._birth_date)
+        return (self._student_id, self._name, self._family, self._birth_date, self.course_name)
 
 
     @property

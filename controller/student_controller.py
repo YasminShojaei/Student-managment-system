@@ -3,18 +3,18 @@ from model.repository.student_reposity import StudentRepository
 
 
 class StudentController:
-    def save_student(self, student_id, name, family, birth_date):
+    def save_student(self, student_id, name, family, birth_date, course_name):
         try:
-            student = Student(student_id, name, family, birth_date)
+            student = Student(student_id, name, family, birth_date, course_name)
             student_repo = StudentRepository()
             student_repo.save_student(student)
             return True, f" student saved {student}"
         except Exception as e:
             return False, f"Error saving student {e}"
 
-    def edit_student(self, student_id, name, family, birth_date):
+    def edit_student(self, student_id, name, family, birth_date, course_name):
         try:
-            student = Student(student_id, name, family, birth_date)
+            student = Student(student_id, name, family, birth_date, course_name)
             student_repo = StudentRepository()
             student_repo.edit_student(student)
             return True, f" student edited {student}"

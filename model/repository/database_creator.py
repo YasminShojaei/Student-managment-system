@@ -3,15 +3,7 @@ import sqlite3
 connection = sqlite3.connect("university_db.sqlite")
 cursor = connection.cursor()
 
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS students (
-    student_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name text NOT NULL,
-    family text NOT NULL,
-    birth_date text NOT NULL
-)
-""")
-
+cursor.execute("ALTER TABLE students ADD COLUMN course_name TEXT")
 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS teachers (

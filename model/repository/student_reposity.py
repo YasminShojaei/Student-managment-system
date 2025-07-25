@@ -1,4 +1,5 @@
 import sqlite3
+from model.tools.student_data_list import course_values
 
 
 class StudentRepository:
@@ -16,17 +17,16 @@ class StudentRepository:
         self.connect()
         self.cursor.execute(
             """insert into students
-                   (student_id, name, family, birth_date)
-            values 
-                   (?, ?, ?, ?)""",
-            [new_student.student_id, new_student.name, new_student.family, new_student.birth_date]
+                   (name, family, birth_date, course_name)
+               values (?, ?, ?, ?)""",
+            (new_student.name, new_student.family, new_student.birth_date, new_student.course_name)
         )
         self.disconnect(commit=True)
 
     def edit_student(self, new_student):
         self.connect()
-        self.cursor.execute("update students set name=?, family=?, birth_date=? where student_id = ?",
-                       [new_student.name, new_student.family, new_student.birth_date, new_student.student_id])
+        self.cursor.execute("update students set name=?, family=?, birth_date=?, course_name=? where student_id = ?",
+                       [new_student.name, new_student.family, new_student.birth_date, new_student.course_name, new_student.student_id])
         self.disconnect(commit = True)
 
     def delete_student(self, student_id):
