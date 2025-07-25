@@ -56,3 +56,8 @@ class CourseController:
             return True, course_repo.find_by_title(title)
         except Exception as e:
             return False, f"Error finding course {title} {e}"
+
+    def get_all_course_names(self):
+        course_repo = CourseRepository()
+        courses = course_repo.get_all_courses()
+        return [course.name for course in courses]

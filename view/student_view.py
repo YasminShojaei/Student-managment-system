@@ -4,6 +4,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 
 from controller.student_controller import StudentController
+from controller.course_controller import CourseController
 from model.entity.student import Student
 from model.tools.student_data_list import course_values
 
@@ -87,7 +88,8 @@ class StudentView:
             font=("Arial", 12)
             ).place(x=20, y=600)
       self.course = StringVar()
-      ttk.Combobox(student_window, textvariable=self.course, state="readonly", values=course_values).place(x=135, y=600)
+      self.course_combobox = ttk.Combobox(student_window, textvariable=self.course, state="readonly",background="light blue", font=("Arial", 12))
+      course_controller=CourseController()
       student_table = ttk.Treeview(student_window, columns=[1,2,3,4,5], show="headings", height=20)
 
       self.student_table.heading(1, text="Student ID")
