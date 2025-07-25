@@ -62,4 +62,10 @@ class CourseRepository:
         self.disconnect()
         return course_list
 
+    def get_all_course_names(self):
+        self.connect()
+        self.cursor.execute("SELECT title FROM courses")
+        course_names = [row[0] for row in self.cursor.fetchall()]
+        self.disconnect()
+        return course_names
 

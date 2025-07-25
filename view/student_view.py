@@ -2,43 +2,14 @@ from tkinter import *
 from tkinter import ttk
 
 from PIL import Image, ImageTk
-from PyQt5.QtGui.QRawFont import familyName
 
 from controller.student_controller import StudentController
 from controller.course_controller import CourseController
 from model.entity.student import Student
 from model.tools.student_data_list import course_values
-
+from tkinter import messagebox as msg
 
 class StudentView:
-
-    def save_student(self):
-        student_id = self.student_id.get()
-        name = self.name.get()
-        family = self.family.get()
-        birth_date = self.birth_date.get()
-        selected_course = self.course.get()
-
-        # student = Student(student_id,name,family,birth_date, )
-
-    def edit_student(self):
-        pass
-
-    def delete_student(self):
-        pass
-
-    def reset_student(self):
-        pass
-
-    def search_student(self):
-        pass
-
-    def load_student(self):
-        pass
-
-    def table_select_student(self, event):
-        pass
-
     def __init__(self):
 
       student_window = Tk()
@@ -100,7 +71,7 @@ class StudentView:
       course_name = course_controller.get_all_course_names()
       self.course_combobox["values"] = course_name
 
-      student_table = ttk.Treeview(student_window, columns=[1,2,3,4,5], show="headings", height=20)
+      self.student_table = ttk.Treeview(student_window, columns=[1,2,3,4,5], show="headings", height=20)
 
       self.student_table.heading(1, text="Student ID")
       self.student_table.heading(2, text="Student Name")
@@ -123,3 +94,121 @@ class StudentView:
       Button(student_window, text="search", width=41, command=self.search_student).place(x=20, y=710)
 
       student_window.mainloop()
+
+
+    def save_student(self):
+        student_id = self.student_id.get()
+        name = self.name.get()
+        family = self.family.get()
+        birth_date = self.birth_date.get()
+        selected_course = self.course.get()
+
+        controller = StudentController()
+        result, message = controller.save_student(student_id, name, family, birth_date, selected_course)
+        if result:
+            msg.showinfo("Student Saved", message)
+            self.load_student()
+            self.reset_student()
+        else:
+            msg.showerror("Student Not Saved", message)
+
+    def edit_student(self):
+        student_id = self.student_id.get()
+        name = self.name.get()
+        family = self.family.get()
+        birth_date = self.birth_date.get()
+        selected_course = self.course.get()
+        controller = StudentController()
+        result, message = controller.edit_student(student_id, name, family, birth_date, selected_course)
+        if result:
+            msg.showinfo("Student Edited", message)
+            self.load_student()
+            self.reset_student()
+        else:
+            msg.showerror("Student Not Edited", message)
+
+    def delete_student(self):
+        student_id = self.student_id.get()
+
+        if not student_id:
+            msg.showerror("Error, please select a student id to delete")
+            return
+
+        controller = StudentController()
+        result, message = controller.delete_student(student_id)
+
+        if result:
+            msg.showinfo("Student Deleted", message)
+            self.load_student()
+            self.reset_student()
+
+        else:
+            msg.showerror("Student Not Deleted", message)
+
+    def reset_student(self):
+        self.student_id.set(0)
+        self.name.set("")
+        self.family.set("")
+        self.birth_date.set("")
+        self.course.set("")
+        self.student_table.selection_remove(self.student_table.selection())
+
+    def search_student(self):
+        student_id = self.student_id.get()
+        name = self.name.get().strip()
+        family = self.family.get().strip()
+
+        controller = StudentController()
+
+        if student_id:
+            success, result = controller.find_by_id(student_id)
+            if success:
+                for row in self.student_table.get_children():
+                    self.student_table.delete(row)
+
+                student = result
+                self.student_table.insert("", END, values=(student[0], student[1], student[2], student[3], student[4]))
+
+                self.student_id.set(student[0])
+                self.name.set(student[1])
+                self.family.set(student[2])
+                self.birth_date.set(student[3])
+                self.course.set(student[4])
+
+            else:
+                msg.showerror("Error, NO student found")
+
+        else:
+            msg.showerror("Error, plaese enter id or name and family to search")
+
+
+
+    def load_student(self):
+        controller = StudentController()
+        success, result = controller.find_all()
+
+        if success:
+            for row in self.student_table.get_children():
+                self.student_table.delete(row)
+
+            for student in result:
+                self.student_table.insert("", "end", values=student)
+
+        else:
+            msg.showerror("Load Error", f"Error loading student {result}")
+
+    def table_select_student(self, event):
+        selected_item = self.student_table.focus()
+
+        if not selected_item:
+            return
+
+        values = self.student_table.item(selected_item)["values"]
+
+        if values:
+            self.student_id.set(values[0])
+            self.name.set(values[1])
+            self.family.set(values[2])
+            self.birth_date.set(values[3])
+            self.course.set(values[4])
+
