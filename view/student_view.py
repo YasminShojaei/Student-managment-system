@@ -60,16 +60,29 @@ class StudentView:
       self.birth_date = StringVar()
       Entry(student_window, textvariable=self.birth_date, background="light blue", font=("Arial", 12)).place(x=135, y=550)
 
+
       Label(student_window,
             text="Course",
             background="light blue",
             font=("Arial", 12)
             ).place(x=20, y=600)
+
       self.course = StringVar()
-      self.course_combobox = ttk.Combobox(student_window, textvariable=self.course, state="readonly",background="light blue", font=("Arial", 12))
-      course_controller=CourseController()
-      course_name = course_controller.get_all_course_names()
-      self.course_combobox["values"] = course_name
+
+      self.course_combobox = ttk.Combobox(student_window,
+                                          textvariable=self.course,
+                                          state="readonly",
+                                          font=("Arial", 12))
+
+      course_controller = CourseController()
+      course_names = course_controller.get_all_course_names()
+
+      self.course_combobox["values"] = course_names
+
+      if course_names:
+          self.course_combobox.current(0)
+
+      self.course_combobox.place(x=135, y=600, width=200)
 
       self.student_table = ttk.Treeview(student_window, columns=[1,2,3,4,5], show="headings", height=20)
 

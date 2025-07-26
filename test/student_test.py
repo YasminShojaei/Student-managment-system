@@ -34,9 +34,9 @@ from model.repository.student_reposity import StudentRepository
 
 # test passed
 # print(student_repo.find_all())
-# student_controller = StudentController()
-# status, message = student_controller.find_all()
-# print(status, message)
+student_controller = StudentController()
+status, message = student_controller.find_all()
+print(status, message)
 
 
 # test passed

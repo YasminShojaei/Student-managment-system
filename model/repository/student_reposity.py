@@ -8,8 +8,9 @@ class StudentRepository:
         self.cursor = None
 
     def connect(self):
-        print(os.getcwd())
-        self.connection = sqlite3.connect("model/repository/university_db.sqlite")
+        db_path = os.path.join(os.path.dirname(__file__), "university_db.sqlite")
+        print("DB absolute path:", db_path)
+        self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
 
     def disconnect(self, commit = False):
