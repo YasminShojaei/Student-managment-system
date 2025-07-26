@@ -87,6 +87,8 @@ class StudentView:
 
       self.student_table.place(x=400, y=15, height=710)
 
+      self.student_table.bind("<<TreeviewSelect>>", self.table_select_student)
+
       Button(student_window, text="Save", width=18, command=self.save_student).place(x=20, y=650)
       Button(student_window, text="edit", width=18, command=self.edit_student).place(x=180, y=650)
       Button(student_window, text="delete", width=18, command=self.delete_student).place(x=20, y=680)

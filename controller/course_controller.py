@@ -59,5 +59,4 @@ class CourseController:
 
     def get_all_course_names(self):
         course_repo = CourseRepository()
-        courses = course_repo.get_all_course_names()
-        return [course.name for course in courses]
+        return course_repo.get_all_course_names()
