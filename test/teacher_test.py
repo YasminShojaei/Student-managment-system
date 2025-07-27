@@ -20,9 +20,9 @@ teacher_repo = TeacherRepository()
 # test passed
 # teacher_repo.edit_teacher(teacher_1)
 # teacher_controller = TeacherController()
-# status, message = teacher_controller.edit_teacher(1357, "yasaman", "mirzai", "1357-02-02")
+# status, message = teacher_controller.edit_teacher(2233, "yasaman", "yasai", "1357-02-02")
 # print(status, message)
-#
+
 # test passed
 # teacher_repo.delete_teacher(1377)
 # teacher_controller = TeacherController()

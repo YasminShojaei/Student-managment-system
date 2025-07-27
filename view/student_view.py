@@ -5,8 +5,6 @@ from PIL import Image, ImageTk
 
 from controller.student_controller import StudentController
 from controller.course_controller import CourseController
-from model.entity.student import Student
-from model.tools.student_data_list import course_values
 from tkinter import messagebox as msg
 
 class StudentView:
@@ -182,7 +180,7 @@ class StudentView:
                     self.student_table.delete(row)
 
                 student = result
-                self.student_table.insert("", END, values=(student[0], student[1], student[2], student[3], student[4]))
+                self.student_table.insert("", "end", values=(student[0], student[1], student[2], student[3], student[4]))
 
                 self.student_id.set(student[0])
                 self.name.set(student[1])

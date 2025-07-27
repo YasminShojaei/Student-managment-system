@@ -7,6 +7,11 @@ class TeacherRepository:
         self.cursor = None
 
     def connect(self):
+        if self.connection:
+            try:
+                self.connection.close()
+            except:
+                pass
         db_path = os.path.join(os.path.dirname(__file__), "university_db.sqlite")
         print("DB absolute path:", db_path)
         self.connection = sqlite3.connect(db_path)
@@ -30,10 +35,18 @@ class TeacherRepository:
         self.disconnect(commit=True)
 
     def edit_teacher(self, new_teacher):
-        self.connect()
-        self.cursor.execute("update teachers set name=?, family=?, birth_date=? where teacher_id = ?",
-                       [new_teacher.name, new_teacher.family, new_teacher.birth_date, new_teacher.teacher_id])
-        self.disconnect(commit = True)
+        try:
+
+            self.connect()
+            self.cursor.execute("update teachers set name=?, family=?, birth_date=? where teacher_id = ?",
+                           [new_teacher.name, new_teacher.family, new_teacher.birth_date, new_teacher.teacher_id])
+            self.disconnect(commit = True)
+
+        except Exception as e:
+            print("Edit teacher error:", e)
+            self.disconnect(commit = True)
+            raise e
+
 
     def delete_teacher(self, teacher_id):
         self.connect()

@@ -63,7 +63,7 @@ class CourseRepository:
     def find_by_title(self, title):
         self.connect()
         self.cursor.execute("select * from courses where title like ?;", [title + "%"])
-        course_list = self.cursor.fetchone()
+        course_list = self.cursor.fetchall()
         self.disconnect()
         return course_list
 
