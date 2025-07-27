@@ -118,7 +118,7 @@ class TeacherView:
             self.load_teacher()
             self.reset_teacher()
         else:
-            msg.showerror("Techer not saved", message)
+            msg.showerror("Teacher not saved", message)
 
     def delete_teacher(self):
         teacher_id = self.teacher_id.get()
@@ -153,9 +153,7 @@ class TeacherView:
         if teacher_id:
             success, result = controller.find_by_id(teacher_id)
             if success:
-                for row in self.teacher_table.get_children():
-                    self.teacher_table.delete(row)
-
+                self.reset_teacher()
                 teacher = result
                 self.teacher_table.insert("", "end", values=(teacher[0], teacher[1], teacher[2], teacher[3]))
 
@@ -163,12 +161,19 @@ class TeacherView:
                 self.name.set(teacher[1])
                 self.family.set(teacher[2])
                 self.birth_date.set(teacher[3])
-
             else:
-                msg.showerror("Error, no teacher found")
+                msg.showerror("Teacher Not Found", "No teacher found with this ID")
 
+        elif name or family:
+            success, result = controller.find_by_name_family(name, family)
+            if success:
+                self.reset_teacher()
+                for teacher in result:
+                    self.teacher_table.insert("", "end", values=(teacher[0], teacher[1], teacher[2], teacher[3]))
+            else:
+                msg.showerror("No Results", "No teachers matched your search")
         else:
-            msg.showerror("Error, please enter id or name and family to search")
+            msg.showwarning("Missing Input", "Please enter ID or name/family to search")
 
     def load_teacher(self):
         controller = TeacherController()

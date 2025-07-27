@@ -176,25 +176,30 @@ class StudentView:
         if student_id:
             success, result = controller.find_by_id(student_id)
             if success:
-                for row in self.student_table.get_children():
-                    self.student_table.delete(row)
-
+                self.reset_student()
                 student = result
-                self.student_table.insert("", "end", values=(student[0], student[1], student[2], student[3], student[4]))
+                self.student_table.insert("", "end",
+                                          values=(student[0], student[1], student[2], student[3], student[4]))
 
                 self.student_id.set(student[0])
                 self.name.set(student[1])
                 self.family.set(student[2])
                 self.birth_date.set(student[3])
                 self.course.set(student[4])
-
             else:
-                msg.showerror("Error, NO student found")
+                msg.showerror("Student Not Found", "No student found with this ID")
 
+        elif name or family:
+            success, result = controller.find_by_name_family(name, family)
+            if success:
+                self.reset_student()
+                for student in result:
+                    self.student_table.insert("", "end",
+                                              values=(student[0], student[1], student[2], student[3], student[4]))
+            else:
+                msg.showerror("No Results", "No students matched your search")
         else:
-            msg.showerror("Error, plaese enter id or name and family to search")
-
-
+            msg.showwarning("Missing Input", "Please enter ID or name/family to search")
 
     def load_student(self):
         controller = StudentController()
