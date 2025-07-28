@@ -56,7 +56,7 @@ class CourseRepository:
     def find_by_date(self, course_date):
         self.connect()
         self.cursor.execute("select * from courses where course_date = ?;", [course_date])
-        course_list = self.cursor.fetchone()
+        course_list = self.cursor.fetchall()
         self.disconnect()
         return course_list
 

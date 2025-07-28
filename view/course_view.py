@@ -184,30 +184,39 @@ class CourseView:
 
         controller = CourseController()
 
+        for row in self.course_table.get_children():
+            self.course_table.delete(row)
+
         if course_id:
             success, result = controller.find_by_id(course_id)
             if success:
                 self.reset_course()
                 course = result
                 self.course_table.insert("", "end", values=(course[0], course[1], course[2], course[3], course[4]))
+
+                self.course_id.set(course[0])
+                self.course_teacher.set(course[1])
+                self.course_title.set(course[2])
+                self.course_unit.set(course[3])
+                self.course_date.set(course[4])
+
             else:
                 msg.showerror("Course Not Found", "No course found with this ID")
 
         elif course_title:
             success, result = controller.find_by_title(course_title)
-            if success:
-                self.reset_course()
+            if success and result:
                 for course in result:
                     self.course_table.insert("", "end", values=(course[0], course[1], course[2], course[3], course[4]))
+
             else:
                 msg.showerror("Course Not Found", "No course found with this title")
 
         elif course_date:
             success, result = controller.find_by_date(course_date)
             if success and result:
-                self.reset_course()
-                course = result
-                self.course_table.insert("", "end", values=(course[0], course[1], course[2], course[3], course[4]))
+                for course in result:
+                    self.course_table.insert("", "end", values=(course[0], course[1], course[2], course[3], course[4]))
             else:
                 msg.showerror("Course Not Found", "No course found with this date")
 
@@ -242,4 +251,4 @@ class CourseView:
             self.course_teacher.set(values[1])
             self.course_title.set(values[2])
             self.course_unit.set(values[3])
-            self.course_date.set(values[3])
+            self.course_date.set(values[4])

@@ -150,6 +150,9 @@ class TeacherView:
 
         controller = TeacherController()
 
+        for row in self.teacher_table.get_children():
+            self.teacher_table.delete(row)
+
         if teacher_id:
             success, result = controller.find_by_id(teacher_id)
             if success:
@@ -161,15 +164,16 @@ class TeacherView:
                 self.name.set(teacher[1])
                 self.family.set(teacher[2])
                 self.birth_date.set(teacher[3])
+
             else:
                 msg.showerror("Teacher Not Found", "No teacher found with this ID")
 
         elif name or family:
             success, result = controller.find_by_name_family(name, family)
-            if success:
-                self.reset_teacher()
+            if success and result:
                 for teacher in result:
                     self.teacher_table.insert("", "end", values=(teacher[0], teacher[1], teacher[2], teacher[3]))
+
             else:
                 msg.showerror("No Results", "No teachers matched your search")
         else:

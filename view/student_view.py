@@ -173,6 +173,9 @@ class StudentView:
 
         controller = StudentController()
 
+        for row in self.student_table.get_children():
+            self.student_table.delete(row)
+
         if student_id:
             success, result = controller.find_by_id(student_id)
             if success:
@@ -191,8 +194,7 @@ class StudentView:
 
         elif name or family:
             success, result = controller.find_by_name_family(name, family)
-            if success:
-                self.reset_student()
+            if success and result:
                 for student in result:
                     self.student_table.insert("", "end",
                                               values=(student[0], student[1], student[2], student[3], student[4]))

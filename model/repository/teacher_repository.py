@@ -64,7 +64,7 @@ class TeacherRepository:
     def find_by_name_family(self, name, family):
         self.connect()
         self.cursor.execute("select * from teachers where name like ? and family like ?;", [name + "%", family + "%"])
-        teacher_list = self.cursor.fetchone()
+        teacher_list = self.cursor.fetchall()
         self.disconnect()
         return teacher_list
 
