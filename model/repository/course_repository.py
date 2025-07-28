@@ -1,7 +1,9 @@
 import sqlite3
 import os
 
+
 class CourseRepository:
+
     def __init__(self):
         self.connection = None
         self.cursor = None
@@ -11,6 +13,7 @@ class CourseRepository:
         print("DB absolute path:", db_path)
         self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
+
     def disconnect(self, commit = False):
         if commit:
             self.connection.commit()

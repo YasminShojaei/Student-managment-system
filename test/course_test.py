@@ -1,25 +1,25 @@
-import sqlite3
-#
-from controller.course_controller import CourseController
-from model.entity.course import Course
-from model.repository.course_repository import CourseRepository
+# import sqlite3
+# #
+# from controller.course_controller import CourseController
+# from model.entity.course import Course
+# from model.repository.course_repository import CourseRepository
 #
 # # test passed
 # course_1 = Course(2525, "Ahmad Mesbah", "python", 5, "1404-06-06 14:30")
 # print(course_1.to_tuple())
 # print(course_1.__repr__())
 #
-course_repo = CourseRepository()
+# course_repo = CourseRepository()
 #
-# test passed
+##test passed
 # # course_repo.save_course(course_1)
 # course_controller = CourseController()
 # status, message = course_controller.save_course(2345, "Ali jalali", "English", 2, "1404-07-01 08:30")
 # print(status, message)
 
-
-from controller.course_controller import CourseController
-import os
+#
+# from controller.course_controller import CourseController
+# import os
 #
 # print("Current working directory:", os.getcwd())
 # print("File exists:", os.path.exists("model/repository/university_db.sqlite"))
@@ -65,7 +65,7 @@ import os
 #
 # test passed
 # print(course_repo.find_by_title("java"))
-course_controller = CourseController()
-status, message = course_controller.find_by_title("java")
-print(status, message)
-#
+# course_controller = CourseController()
+# status, message = course_controller.find_by_title("java")
+# print(status, message)
+# #

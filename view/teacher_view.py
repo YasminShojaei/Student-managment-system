@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
-
 from controller.teacher_controller import TeacherController
 from tkinter import messagebox as msg
 
@@ -64,15 +63,10 @@ class TeacherView:
         self.teacher_table.heading(3, text="teacher Family")
         self.teacher_table.heading(4, text="teacher Birthday")
 
-
-
         self.teacher_table.column(1, width=200, anchor="center")
         self.teacher_table.column(2, width=250, anchor="center")
         self.teacher_table.column(3, width=250, anchor="center")
         self.teacher_table.column(4, width=200, anchor="center")
-
-
-
 
         self.teacher_table.place(x=400, y=15, height=700)
 
@@ -85,7 +79,6 @@ class TeacherView:
         Button(teacher_window, text="search", width=41, command=self.search_teacher).place(x=20, y=690)
 
         teacher_window.mainloop()
-
 
     def save_teacher(self):
         teacher_id = self.teacher_id.get()
@@ -113,10 +106,12 @@ class TeacherView:
 
         controller = TeacherController()
         result, message = controller.edit_teacher(teacher_id, name, family, birth_date)
+
         if result:
             msg.showinfo("Teacher edited", message)
             self.load_teacher()
             self.reset_teacher()
+
         else:
             msg.showerror("Teacher not saved", message)
 
@@ -137,6 +132,7 @@ class TeacherView:
 
         else:
             msg.showerror("Teacher not deleted", message)
+
     def reset_teacher(self):
         self.teacher_id.set(0)
         self.name.set("")
@@ -155,6 +151,7 @@ class TeacherView:
 
         if teacher_id:
             success, result = controller.find_by_id(teacher_id)
+
             if success:
                 self.reset_teacher()
                 teacher = result
@@ -170,12 +167,14 @@ class TeacherView:
 
         elif name or family:
             success, result = controller.find_by_name_family(name, family)
+
             if success and result:
                 for teacher in result:
                     self.teacher_table.insert("", "end", values=(teacher[0], teacher[1], teacher[2], teacher[3]))
 
             else:
                 msg.showerror("No Results", "No teachers matched your search")
+
         else:
             msg.showwarning("Missing Input", "Please enter ID or name/family to search")
 

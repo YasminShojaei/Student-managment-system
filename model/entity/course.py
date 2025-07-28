@@ -3,13 +3,13 @@ from model.tools.validation import course_id_validator, course_title_validator, 
 
 
 class Course:
+
     def __init__(self, course_id, course_teacher, title, unit, course_date):
         self.course_id = course_id
         self.course_teacher = course_teacher
         self.title = title
         self.unit = unit
         self.course_date = course_date
-
 
     def __repr__(self):
         return f"{self.__dict__}"

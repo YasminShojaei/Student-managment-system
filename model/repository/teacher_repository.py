@@ -1,6 +1,7 @@
 import sqlite3
 import os
 
+
 class TeacherRepository:
     def __init__(self):
         self.connection = None
@@ -11,6 +12,7 @@ class TeacherRepository:
         print("DB absolute path:", db_path)
         self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
+
     def disconnect(self, commit = False):
         if commit:
             self.connection.commit()
@@ -29,6 +31,7 @@ class TeacherRepository:
         self.disconnect(commit=True)
 
     def edit_teacher(self, new_teacher):
+
         try:
 
             self.connect()

@@ -1,10 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
-
 from controller.course_controller import CourseController
 from tkinter import messagebox as msg
-
 from controller.teacher_controller import TeacherController
 
 
@@ -38,14 +36,11 @@ class CourseView:
             background="light blue",
             font=("Arial", 12)
             ).place(x=20, y=350)
-
         self.course_teacher = StringVar()
-
         self.course_teacher_combobox = ttk.Combobox(course_window,
                                                     textvariable=self.course_teacher,
                                                     state="readonly",
                                                     font=("Arial", 12))
-
         t_controller = TeacherController()
         teacher_names = t_controller.get_all_teachers_names()
 
@@ -94,14 +89,11 @@ class CourseView:
         self.course_table.heading(4, text="course unit")
         self.course_table.heading(5, text="course date")
 
-
-
         self.course_table.column(1, width=200, anchor="center")
         self.course_table.column(2, width=250, anchor="center")
         self.course_table.column(3, width=250, anchor="center")
         self.course_table.column(4, width=200, anchor="center")
         self.course_table.column(5, width=200, anchor="center")
-
 
         self.course_table.place(x=400, y=15, height=670)
 
@@ -114,7 +106,6 @@ class CourseView:
         Button(course_window, text="search", width=41, command=self.search_course).place(x=20, y=660)
 
         course_window.mainloop()
-
 
     def save_course(self):
         course_id = self.course_id.get()
@@ -144,10 +135,12 @@ class CourseView:
 
         controller = CourseController()
         result, message = controller.edit_course(course_id, course_teacher, course_title, course_unit, course_date)
+
         if result:
             msg.showinfo("course edited", message)
             self.load_course()
             self.reset_course()
+
         else:
             msg.showerror("course not saved", message)
 
@@ -189,6 +182,7 @@ class CourseView:
 
         if course_id:
             success, result = controller.find_by_id(course_id)
+
             if success:
                 self.reset_course()
                 course = result
@@ -205,6 +199,7 @@ class CourseView:
 
         elif course_title:
             success, result = controller.find_by_title(course_title)
+
             if success and result:
                 for course in result:
                     self.course_table.insert("", "end", values=(course[0], course[1], course[2], course[3], course[4]))
@@ -214,6 +209,7 @@ class CourseView:
 
         elif course_date:
             success, result = controller.find_by_date(course_date)
+
             if success and result:
                 for course in result:
                     self.course_table.insert("", "end", values=(course[0], course[1], course[2], course[3], course[4]))

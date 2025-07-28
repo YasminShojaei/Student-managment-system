@@ -1,11 +1,10 @@
 from tkinter import *
 from tkinter import ttk
-
 from PIL import Image, ImageTk
-
 from controller.student_controller import StudentController
 from controller.course_controller import CourseController
 from tkinter import messagebox as msg
+
 
 class StudentView:
     def __init__(self):
@@ -58,23 +57,19 @@ class StudentView:
       self.birth_date = StringVar()
       Entry(student_window, textvariable=self.birth_date, background="light blue", font=("Arial", 12)).place(x=135, y=550)
 
-
+    # selected course by student
       Label(student_window,
             text="Course",
             background="light blue",
             font=("Arial", 12)
             ).place(x=20, y=600)
-
       self.course = StringVar()
-
       self.course_combobox = ttk.Combobox(student_window,
                                           textvariable=self.course,
                                           state="readonly",
                                           font=("Arial", 12))
-
       course_controller = CourseController()
       course_names = course_controller.get_all_course_names()
-
       self.course_combobox["values"] = course_names
 
       if course_names:
@@ -108,7 +103,6 @@ class StudentView:
 
       student_window.mainloop()
 
-
     def save_student(self):
         student_id = self.student_id.get()
         name = self.name.get()
@@ -118,10 +112,12 @@ class StudentView:
 
         controller = StudentController()
         result, message = controller.save_student(student_id, name, family, birth_date, selected_course)
+
         if result:
             msg.showinfo("Student Saved", message)
             self.load_student()
             self.reset_student()
+
         else:
             msg.showerror("Student Not Saved", message)
 
@@ -133,10 +129,12 @@ class StudentView:
         selected_course = self.course.get()
         controller = StudentController()
         result, message = controller.edit_student(student_id, name, family, birth_date, selected_course)
+
         if result:
             msg.showinfo("Student Edited", message)
             self.load_student()
             self.reset_student()
+
         else:
             msg.showerror("Student Not Edited", message)
 
@@ -178,6 +176,7 @@ class StudentView:
 
         if student_id:
             success, result = controller.find_by_id(student_id)
+
             if success:
                 self.reset_student()
                 student = result
@@ -189,17 +188,21 @@ class StudentView:
                 self.family.set(student[2])
                 self.birth_date.set(student[3])
                 self.course.set(student[4])
+
             else:
                 msg.showerror("Student Not Found", "No student found with this ID")
 
         elif name or family:
             success, result = controller.find_by_name_family(name, family)
+
             if success and result:
                 for student in result:
                     self.student_table.insert("", "end",
                                               values=(student[0], student[1], student[2], student[3], student[4]))
+
             else:
                 msg.showerror("No Results", "No students matched your search")
+
         else:
             msg.showwarning("Missing Input", "Please enter ID or name/family to search")
 

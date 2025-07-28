@@ -1,6 +1,8 @@
 from model.tools.validation import *
 
+
 class Teacher:
+
     def __init__(self, teacher_id, name, family, birth_date):
         self.teacher_id = teacher_id
         self.name = name

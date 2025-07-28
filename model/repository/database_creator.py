@@ -1,6 +1,7 @@
 import sqlite3
 import os
 
+
 def create_database():
 
     connection = sqlite3.connect("university_db.sqlite")

@@ -2,6 +2,7 @@ from model.tools.validation import *
 
 
 class Student:
+
     def __init__(self, student_id, name, family, birth_date, course_name):
         self.student_id = student_id
         self.name = name
@@ -14,7 +15,6 @@ class Student:
 
     def to_tuple(self):
         return (self._student_id, self._name, self._family, self._birth_date, self.course_name)
-
 
     @property
     def student_id(self):

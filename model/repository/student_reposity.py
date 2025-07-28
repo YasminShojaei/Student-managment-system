@@ -2,6 +2,7 @@ import sqlite3
 from model.tools.student_data_list import course_values
 import os
 
+
 class StudentRepository:
     def __init__(self):
         self.connection = None
