@@ -75,3 +75,4 @@ class CourseController:
 
         course_repo = CourseRepository()
         return course_repo.get_all_course_names()
+
