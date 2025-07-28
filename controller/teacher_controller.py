@@ -49,3 +49,7 @@ class TeacherController:
             return True, teacher_repo.find_by_name_family(name, family)
         except Exception as e:
             return False, f"Error finding teacher {name}, {family} {e}"
+
+    def get_all_teachers_names(self):
+        teacher_repo = TeacherRepository()
+        return teacher_repo.get_all_teachers_names()

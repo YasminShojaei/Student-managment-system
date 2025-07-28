@@ -7,16 +7,10 @@ class TeacherRepository:
         self.cursor = None
 
     def connect(self):
-        if self.connection:
-            try:
-                self.connection.close()
-            except:
-                pass
         db_path = os.path.join(os.path.dirname(__file__), "university_db.sqlite")
         print("DB absolute path:", db_path)
         self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
-
     def disconnect(self, commit = False):
         if commit:
             self.connection.commit()
@@ -73,3 +67,10 @@ class TeacherRepository:
         teacher_list = self.cursor.fetchone()
         self.disconnect()
         return teacher_list
+
+    def get_all_teachers_names(self):
+        self.connect()
+        self.cursor.execute("SELECT * FROM teachers")
+        rows = self.cursor.fetchall()
+        self.disconnect()
+        return [f"{row[1]} {row[2]}" for row in rows]  # name + family

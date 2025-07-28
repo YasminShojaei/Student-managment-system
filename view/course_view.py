@@ -5,6 +5,8 @@ from PIL import Image, ImageTk
 from controller.course_controller import CourseController
 from tkinter import messagebox as msg
 
+from controller.teacher_controller import TeacherController
+
 
 class CourseView:
 
@@ -36,8 +38,26 @@ class CourseView:
             background="light blue",
             font=("Arial", 12)
             ).place(x=20, y=350)
+
         self.course_teacher = StringVar()
-        Entry(course_window, textvariable=self.course_teacher, background="light blue", font=("Arial", 12)).place(x=135, y=350)
+
+        self.course_teacher_combobox = ttk.Combobox(course_window,
+                                                    textvariable=self.course_teacher,
+                                                    state="readonly",
+                                                    font=("Arial", 12))
+
+        t_controller = TeacherController()
+        teacher_names = t_controller.get_all_teachers_names()
+
+        if teacher_names:
+            self.course_teacher_combobox["values"] = teacher_names
+            self.course_teacher_combobox.current(0)
+
+        else:
+            self.course_teacher_combobox["values"] = ["first save the teacher"]
+            self.course_teacher_combobox.current(0)
+
+        self.course_teacher_combobox.place(x=135, y=350, width=200)
 
       # course title
         Label(course_window,
