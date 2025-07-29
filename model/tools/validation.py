@@ -67,7 +67,7 @@ def course_date_validator(course_date):
     try:
         if type(course_date) == str:
             datetime.strptime(course_date, "%Y-%m-%d %H:%M")
-        elif type(course_date) == datetime:
+        elif type(course_date) == datetime.strptime(course_date, "%Y-%m-%d"):
             pass
     except Exception as e:
         print(f"{e} not a valid date and time (example: 2025-07-14 14:30)")
